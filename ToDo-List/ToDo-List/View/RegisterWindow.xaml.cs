@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ToDo_List.ViewModel;
 
-namespace ToDo_List
+namespace ToDo_List.View
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// RegisterWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public MainWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
-            this.DataContext = new ShowDataViewModel();
         }
     }
 }

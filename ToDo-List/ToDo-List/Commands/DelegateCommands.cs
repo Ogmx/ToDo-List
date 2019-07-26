@@ -10,7 +10,7 @@ namespace ToDo_List.Commands
     public class DelegateCommands : ICommand
     {
         public Action<object> ExecuteCommand = null;
-
+   
         public Func<object, bool> CanExecuteCommand = null;
 
         //当命令可执行状态发生改变时，应当被激发

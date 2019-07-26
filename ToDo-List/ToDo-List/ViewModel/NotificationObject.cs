@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+//相当于ViewModel的基类
 namespace ToDo_List.ViewModel
 {
-    public class UserViewModel:INotifyPropertyChanged
+    public class NotificationObject:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged(string Name)
+        public void RaisePropertyChanged(string propertyName)
         {
-            if(Name != null)
+            if(propertyName != null)
             {
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(Name));
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

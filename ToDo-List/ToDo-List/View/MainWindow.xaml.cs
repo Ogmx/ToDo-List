@@ -24,7 +24,7 @@ namespace ToDo_List
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ShowDataViewModel();
+            this.DataContext = new MainViewModel();
         }
     }
 }

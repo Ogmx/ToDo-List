@@ -11,9 +11,9 @@ using ToDo_List.Model;
 
 namespace ToDo_List.ViewModel
 {
-    public class ShowDataViewModel:UserViewModel
+    public class MainViewModel:NotificationObject
     {
-        ObservableCollection<Model.UserModel> _mylist = new ObservableCollection<Model.UserModel>();
+        ObservableCollection<UserModel> _mylist = new ObservableCollection<UserModel>();
 
         string _name = string.Empty;
         int _id = 0;
@@ -21,7 +21,8 @@ namespace ToDo_List.ViewModel
         string _sex = string.Empty;
         string _remarks = string.Empty;
 
-        public ObservableCollection<Model.UserModel> mylist
+        //定义数据操作
+        public ObservableCollection<UserModel> mylist   
         {
             get { return _mylist; }
             set
@@ -30,7 +31,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("mylist");
             }
         }
-
         public string Name
         {
             get { return _name; }
@@ -40,7 +40,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("Name");
             }
         }
-
         public string Sex
         {
             get { return _sex; }
@@ -50,7 +49,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("Sex");
             }
         }
-
         public string Remarks
         {
             get { return _remarks; }
@@ -69,7 +67,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("ID");
             }
         }
-
         public int Age
         {
             get { return _age; }
@@ -80,31 +77,7 @@ namespace ToDo_List.ViewModel
             }
         }
 
-        public ShowDataViewModel()
-        {
-            AddCommand = new DelegateCommands();
-            AddCommand.ExecuteCommand = new Action<object>(addStudent);
-
-            UpdateCommand = new DelegateCommands();
-            UpdateCommand.ExecuteCommand = new Action<object>(updateStudent);//修改方法
-
-            DeleteCommand = new DelegateCommands();
-            DeleteCommand.ExecuteCommand = new Action<object>(deleteStudent);//修改方法
-
-            SelectionChangedCommand = new DelegateCommands();
-            SelectionChangedCommand.ExecuteCommand = new Action<object>(selectUser);
-
-            mylist.Add(new Model.UserModel() { ID = 1, Name = "张三", Age = 20, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 2, Name = "李四", Age = 21, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 3, Name = "王五", Age = 22, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 4, Name = "赵六", Age = 24, Sex = "女", Remarks = "无" });
-        }
-
-        public DelegateCommands AddCommand { get; set; }
-        public DelegateCommands UpdateCommand { get; set; }
-        public DelegateCommands DeleteCommand { get; set; }
-        public DelegateCommands SelectionChangedCommand { get; set; }
-
+        //定义功能操作
         public void addStudent(object parameter)
         {
             int id = mylist[mylist.Count - 1].ID;
@@ -147,14 +120,13 @@ namespace ToDo_List.ViewModel
             mylist = _mylist;
 
         }
-
         public void selectUser(object parameter)
         {
+
             if (parameter != null)
             {
                 DataGrid dg = (DataGrid)parameter;
-
-                if (dg.SelectedItems.Count > 0)
+                if (Type.GetType("ShowDataViewModel") == dg.SelectedItems[0].GetType())
                 {
                     UserModel user = (UserModel)dg.SelectedItems[0];
                     ID = user.ID;
@@ -163,7 +135,39 @@ namespace ToDo_List.ViewModel
                     Sex = user.Sex;
                     Remarks = user.Remarks;
                 }
+
             }
         }
+
+
+        //定义构造函数，关联功能操作与DelegateCommands
+        public MainViewModel()
+        {
+
+            AddCommand = new DelegateCommands();
+            AddCommand.ExecuteCommand = new Action<object>(addStudent);
+
+            UpdateCommand = new DelegateCommands();
+            UpdateCommand.ExecuteCommand = new Action<object>(updateStudent);//修改方法
+
+            DeleteCommand = new DelegateCommands();
+            DeleteCommand.ExecuteCommand = new Action<object>(deleteStudent);//修改方法
+
+            SelectionChangedCommand = new DelegateCommands();
+            SelectionChangedCommand.ExecuteCommand = new Action<object>(selectUser);
+
+            //模拟数据
+            mylist.Add(new Model.UserModel() { ID = 1, Name = "张三", Age = 20, Sex = "女", Remarks = "无" });
+            mylist.Add(new Model.UserModel() { ID = 2, Name = "李四", Age = 21, Sex = "女", Remarks = "无" });
+            mylist.Add(new Model.UserModel() { ID = 3, Name = "王五", Age = 22, Sex = "女", Remarks = "无" });
+            mylist.Add(new Model.UserModel() { ID = 4, Name = "赵六", Age = 24, Sex = "女", Remarks = "无" });
+        }
+
+        public DelegateCommands AddCommand { get; set; }
+        public DelegateCommands UpdateCommand { get; set; }
+        public DelegateCommands DeleteCommand { get; set; }
+        public DelegateCommands SelectionChangedCommand { get; set; }
+
+       
     }
 }

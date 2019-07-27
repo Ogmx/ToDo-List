@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Users>
+  <User>
+    <ID>1</ID>
+    <Name>张三</Name>
+    <Age>20</Age>
+    <Sex>男</Sex>
+    <Remarks>无</Remarks>
+   </User>
+  <User>
+    <ID>2</ID>
+    <Name>李四</Name>
+    <Age>25</Age>
+    <Sex>男</Sex>
+    <Remarks>无</Remarks>
+  </User>
+  <User>
+    <ID>3</ID>
+    <Name>王五</Name>
+    <Age>30</Age>
+    <Sex>女</Sex>
+    <Remarks>无</Remarks>
+  </User>
+</Users>

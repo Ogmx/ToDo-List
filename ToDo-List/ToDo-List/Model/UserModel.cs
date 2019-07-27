@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//定义User类
 namespace ToDo_List.Model
 {
-    public class UserModel
+    public class User
     {
         public int ID {get; set;}
         public string Name { get; set; }

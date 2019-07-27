@@ -8,12 +8,13 @@ using System.Windows;
 using System.Windows.Controls;
 using ToDo_List.Commands;
 using ToDo_List.Model;
+using ToDo_List.Services;
 
 namespace ToDo_List.ViewModel
 {
     public class MainViewModel:NotificationObject
     {
-        ObservableCollection<UserModel> _mylist = new ObservableCollection<UserModel>();
+        List<User> _mylist = new List<User>();
 
         string _name = string.Empty;
         int _id = 0;
@@ -21,8 +22,8 @@ namespace ToDo_List.ViewModel
         string _sex = string.Empty;
         string _remarks = string.Empty;
 
-        //定义数据操作
-        public ObservableCollection<UserModel> mylist   
+        //定义数据属性
+        public List<User> mylist   
         {
             get { return _mylist; }
             set
@@ -77,11 +78,18 @@ namespace ToDo_List.ViewModel
             }
         }
 
-        //定义功能操作
+        //声明命令属性
+        public DelegateCommands AddCommand { get; set; }
+        public DelegateCommands UpdateCommand { get; set; }
+        public DelegateCommands DeleteCommand { get; set; }
+        public DelegateCommands SelectionChangedCommand { get; set; }
+        public DelegateCommands SaveCommand { get; set; }
+
+        //定义命令属性
         public void addStudent(object parameter)
         {
             int id = mylist[mylist.Count - 1].ID;
-            mylist.Add(new UserModel() { ID = id + 1, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
+            mylist.Add(new User() { ID = id + 1, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
             //Binding();
             RaisePropertyChanged("myList");
         }
@@ -115,7 +123,7 @@ namespace ToDo_List.ViewModel
                 MessageBox.Show("请选择删除项");
                 return;
             }
-            UserModel user1 = _mylist.Single(p => p.ID == ID);
+            User user1 = _mylist.Single(p => p.ID == ID);
             _mylist.Remove(user1);
             mylist = _mylist;
 
@@ -126,9 +134,9 @@ namespace ToDo_List.ViewModel
             if (parameter != null)
             {
                 DataGrid dg = (DataGrid)parameter;
-                if (Type.GetType("ShowDataViewModel") == dg.SelectedItems[0].GetType())
+                if (dg!=null)
                 {
-                    UserModel user = (UserModel)dg.SelectedItems[0];
+                    User user = (User)dg.SelectedItems[0];
                     ID = user.ID;
                     Name = user.Name;
                     Age = user.Age;
@@ -138,9 +146,14 @@ namespace ToDo_List.ViewModel
 
             }
         }
+        public void SaveUserInfo(object parameter)
+        {
+            XmlDataService ds = new XmlDataService();
+            ds.SetAllUsers(mylist);
+            MessageBox.Show("保存成功");
 
-
-        //定义构造函数，关联功能操作与DelegateCommands
+        }
+        //关联命令属性
         public MainViewModel()
         {
 
@@ -156,18 +169,21 @@ namespace ToDo_List.ViewModel
             SelectionChangedCommand = new DelegateCommands();
             SelectionChangedCommand.ExecuteCommand = new Action<object>(selectUser);
 
-            //模拟数据
-            mylist.Add(new Model.UserModel() { ID = 1, Name = "张三", Age = 20, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 2, Name = "李四", Age = 21, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 3, Name = "王五", Age = 22, Sex = "女", Remarks = "无" });
-            mylist.Add(new Model.UserModel() { ID = 4, Name = "赵六", Age = 24, Sex = "女", Remarks = "无" });
+            SaveCommand = new DelegateCommands();
+            SaveCommand.ExecuteCommand = new Action<object>(SaveUserInfo);
+
+            LoadUserInfo();
         }
 
-        public DelegateCommands AddCommand { get; set; }
-        public DelegateCommands UpdateCommand { get; set; }
-        public DelegateCommands DeleteCommand { get; set; }
-        public DelegateCommands SelectionChangedCommand { get; set; }
-
-       
+        public void LoadUserInfo()
+        {
+            XmlDataService ds = new XmlDataService();
+            var users = ds.GetAllUsers();
+            
+            foreach(var user in users)
+            {
+                mylist.Add(new User() { ID = user.ID, Name = user.Name, Age = user.Age, Sex = user.Sex, Remarks = user.Remarks });
+            }
+        }
     }
 }

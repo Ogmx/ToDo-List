@@ -8,47 +8,48 @@
 		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 		mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="400" MinHeight="400" MaxWidth="400" MaxHeight="400">
-	<Window.BorderBrush>
-		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-			<GradientStop Color="Black" Offset="0"/>
-			<GradientStop Color="#FF230707" Offset="1"/>
-		</LinearGradientBrush>
-	</Window.BorderBrush>
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF230707" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
 
-	<Grid Margin="0,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="236*"/>
-			<ColumnDefinition Width="175*"/>
-		</Grid.ColumnDefinitions>
-		<DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-75,0,0">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="SelectionChanged" >
-					<i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-			<DataGrid.Columns>
-				<DataGridTextColumn Binding="{Binding ID}" Header="编号"/>
-				<DataGridTextColumn Binding="{Binding Name}" Header="姓名" Width="100"/>
-				<DataGridTextColumn Binding="{Binding Age}" Header="年龄"/>
-				<DataGridTextColumn Binding="{Binding Sex}" Header="性别" Width="60"/>
-				<DataGridTextColumn Binding="{Binding Remarks}" Header="备注" Width="172"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		<Label x:Name="labID" Content="编号：" Margin="10,153,174.8,0" Height="26" VerticalAlignment="Top"/>
-		<TextBox x:Name="txtID"  IsEnabled ="False"  Text="{Binding ID}" Margin="63,156,112.2,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top"/>
-		<Label x:Name="labName" Content="姓名：" Margin="143,154,0,0" HorizontalAlignment="Left" Width="46" Height="26" VerticalAlignment="Top" />
-		<TextBox x:Name="txtName" Text="{Binding Name}" Margin="189,156,141,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-		<Label x:Name="labPAge" Content="年龄：" Margin="30.8,154,0,0" RenderTransformOrigin="-0.233,0.68" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Height="25" Width="47"/>
-		<TextBox x:Name="txtAge" Text="{Binding Age}" Margin="79.8,156,7.285,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" Grid.Column="1"/>
-		<Label x:Name="labSex" Content="性别：" Margin="10,188,174.8,0" RenderTransformOrigin="-0.233,0.68" Height="26" VerticalAlignment="Top"/>
-		<ComboBox Text="{Binding Sex}"  SelectedIndex="0" x:Name="comboBox" Margin="63,191,114.2,0" Height="21" VerticalAlignment="Top">
-			<ComboBoxItem Tag="1" Content="男"/>
-			<ComboBoxItem Tag="2" Content="女"/>
-		</ComboBox>
-		<Label x:Name="labRemarks" Content="备注：" HorizontalAlignment="Left" Margin="144,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.233,0.68" Height="26" Width="46"/>
-		<TextBox x:Name="txtRemarks" Text="{Binding Remarks}" HorizontalAlignment="Left" Height="22" Margin="189,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
-		<Button x:Name="butSave" Command="{Binding AddCommand}" Content="新增" HorizontalAlignment="Left" Margin="70,240,0,-44.6" VerticalAlignment="Top" Width="69" Height="19" RenderTransformOrigin="0.466,0.941"/>
-		<Button x:Name="butUpdate" Command="{Binding UpdateCommand}" Content="修改" HorizontalAlignment="Left" Margin="160,240,0,-44.6" VerticalAlignment="Top" Width="72" Height="19" RenderTransformOrigin="0.466,0.941" Grid.ColumnSpan="2"/>
-		<Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="31.2,240,0,-44.6" VerticalAlignment="Top" Width="69" Height="19" RenderTransformOrigin="0.466,0.941" Grid.Column="1"/>
-	</Grid>
+    <Grid Margin="0,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="236*"/>
+            <ColumnDefinition Width="175*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-75,0,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged" >
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="编号"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="姓名" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Age}" Header="年龄"/>
+                <DataGridTextColumn Binding="{Binding Sex}" Header="性别" Width="60"/>
+                <DataGridTextColumn Binding="{Binding Remarks}" Header="备注" Width="172"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="labID" Content="编号：" Margin="10,153,174.8,0" Height="26" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtID"  IsEnabled ="False"  Text="{Binding ID}" Margin="63,156,112.2,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top"/>
+        <Label x:Name="labName" Content="姓名：" Margin="143,154,0,0" HorizontalAlignment="Left" Width="46" Height="26" VerticalAlignment="Top" />
+        <TextBox x:Name="txtName" Text="{Binding Name}" Margin="189,156,141,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labPAge" Content="年龄：" Margin="30.8,154,0,0" RenderTransformOrigin="-0.233,0.68" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Height="25" Width="47"/>
+        <TextBox x:Name="txtAge" Text="{Binding Age}" Margin="79.8,156,7.285,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="labSex" Content="性别：" Margin="10,188,174.8,0" RenderTransformOrigin="-0.233,0.68" Height="26" VerticalAlignment="Top"/>
+        <ComboBox Text="{Binding Sex}"  SelectedIndex="0" x:Name="comboBox" Margin="63,191,114.2,0" Height="21" VerticalAlignment="Top">
+            <ComboBoxItem Tag="1" Content="男"/>
+            <ComboBoxItem Tag="2" Content="女"/>
+        </ComboBox>
+        <Label x:Name="labRemarks" Content="备注：" HorizontalAlignment="Left" Margin="144,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.233,0.68" Height="26" Width="46"/>
+        <TextBox x:Name="txtRemarks" Text="{Binding Remarks}" HorizontalAlignment="Left" Height="22" Margin="189,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
+        <Button x:Name="butAdd" Command="{Binding AddCommand}" Content="新增" HorizontalAlignment="Left" Margin="44,240,0,-44.6" VerticalAlignment="Top" Width="69" Height="19" RenderTransformOrigin="0.466,0.941"/>
+        <Button x:Name="butUpdate" Command="{Binding UpdateCommand}" Content="修改" HorizontalAlignment="Left" Margin="133,240,0,-44.6" VerticalAlignment="Top" Width="72" Height="19" RenderTransformOrigin="0.466,0.941"/>
+        <Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="222,240,0,-44.6" VerticalAlignment="Top" Width="69" Height="19" RenderTransformOrigin="0.466,0.941" Grid.ColumnSpan="2"/>
+        <Button x:Name="butSave" Content="保存" Command="{Binding SaveCommand}" Grid.Column="1" HorizontalAlignment="Left" Margin="85.2,240,0,-25.4" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.011,-0.895"/>
+    </Grid>
 </Window>

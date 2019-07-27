@@ -20,7 +20,7 @@
             <ColumnDefinition Width="236*"/>
             <ColumnDefinition Width="175*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-70,0,0">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-70,0,0" AutoGenerateColumns="False" CanUserAddRows="False" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />

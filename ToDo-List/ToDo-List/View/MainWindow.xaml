@@ -7,7 +7,7 @@
 		xmlns:vm="clr-namespace:ToDo_List.ViewModel"
 		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 		mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="400" MinHeight="400" MaxWidth="400" MaxHeight="400">
+        Title="MainWindow" Height="397.163" Width="396.217" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="400" MinHeight="400" MaxWidth="400" MaxHeight="400">
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0"/>
@@ -20,7 +20,7 @@
             <ColumnDefinition Width="236*"/>
             <ColumnDefinition Width="175*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-75,0,0">
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-70,0,0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />

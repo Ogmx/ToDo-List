@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace ToDo_List.Services
 {
     class XmlDataService:IDataService
     {
-        public List<User> GetAllUsers()
+        public ObservableCollection<User> GetAllUsers()
         {
-            List<User> UserList = new List<User>();
+            ObservableCollection<User> UserList = new ObservableCollection<User>();
             string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\UserInfo.xml");
             XDocument xDOc = XDocument.Load(xmlFileName);
             var users = xDOc.Descendants("User");
@@ -22,13 +23,14 @@ namespace ToDo_List.Services
                 user.ID = int.Parse(d.Element("ID").Value);
                 user.Name = d.Element("Name").Value;
                 user.Age = int.Parse(d.Element("Age").Value);
+                user.Sex = d.Element("Sex").Value;
                 user.Remarks = d.Element("Remarks").Value;
                 UserList.Add(user);
             }
             return UserList;
         }
 
-        public void SetAllUsers(List<User>UserList)
+        public void SetAllUsers(ObservableCollection<User>UserList)
         {
             string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\Test.xml");
             XElement root = new XElement("Users");

@@ -14,7 +14,7 @@ namespace ToDo_List.ViewModel
 {
     public class MainViewModel:NotificationObject
     {
-        List<User> _mylist = new List<User>();
+        ObservableCollection<User> _mylist = new ObservableCollection<User>();
 
         string _name = string.Empty;
         int _id = 0;
@@ -23,7 +23,7 @@ namespace ToDo_List.ViewModel
         string _remarks = string.Empty;
 
         //定义数据属性
-        public List<User> mylist   
+        public ObservableCollection<User> mylist   
         {
             get { return _mylist; }
             set
@@ -112,6 +112,7 @@ namespace ToDo_List.ViewModel
                     break;
                 }
             }
+            RaisePropertyChanged("myList");
             //Binding();
             mylist = _mylist;
 
@@ -134,7 +135,7 @@ namespace ToDo_List.ViewModel
             if (parameter != null)
             {
                 DataGrid dg = (DataGrid)parameter;
-                if (dg!=null)
+                if (dg.SelectedItems.Count > 0)
                 {
                     User user = (User)dg.SelectedItems[0];
                     ID = user.ID;
@@ -184,6 +185,7 @@ namespace ToDo_List.ViewModel
             {
                 mylist.Add(new User() { ID = user.ID, Name = user.Name, Age = user.Age, Sex = user.Sex, Remarks = user.Remarks });
             }
+          
         }
     }
 }

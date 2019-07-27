@@ -7,8 +7,8 @@
    对于常见错误给出异常处理   (未实现)<br>
    *加分项：利用log4net产生log文件*  (未实现)<br> 
 ### 已知bug：
-   点击空白项会导致崩溃
-   点击更改后不能即时显示更改后结果
+   点击空白项会导致崩溃<br>
+   点击更改后不能即时显示更改后结果<br>
 ### 参照：课件中Lesson8和Lesson9中程序
 [VS2017如何连接GitHub](https://blog.csdn.net/cc93691810/article/details/85252523)<br>
 [MVVM教程](https://www.bilibili.com/video/av29782724?t=6414)<br>

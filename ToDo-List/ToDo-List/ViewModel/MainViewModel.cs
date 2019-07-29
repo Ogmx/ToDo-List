@@ -21,6 +21,8 @@ namespace ToDo_List.ViewModel
         int _age = 0;
         string _sex = string.Empty;
         string _remarks = string.Empty;
+        int _selectid = -1;
+       
 
         //定义数据属性
         public ObservableCollection<User> mylist   
@@ -77,6 +79,17 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("Age");
             }
         }
+
+        public int selectid
+        {
+            get { return _selectid; }
+            set
+            {
+                _selectid = value;
+                RaisePropertyChanged("selectid");
+            }
+        }
+       
 
         //声明命令属性
         public DelegateCommands AddCommand { get; set; }
@@ -165,8 +178,19 @@ namespace ToDo_List.ViewModel
                 bool bFind = mylist.Any<User>(p => p.Name == Name );
                 if (bFind)
                 {
-                    //object tmp =  mylist.Where<User>(p => p.Name == Name);
-                  
+
+                    //dataGrid
+                    long find = 0;
+                    long len = mylist.LongCount();
+                    for(long i = 0; i < len; ++i)
+                    {
+                        if( mylist[(int)i].Name == Name)
+                        {
+                            find = i;
+                            break;
+                        }
+                    }
+                    selectid = (int)find;
                     MessageBox.Show("查找成功");
                 }
                 else

@@ -15,24 +15,39 @@
         </LinearGradientBrush>
     </Window.BorderBrush>
 
-    <Grid Margin="0,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+    <Grid Margin="0,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="236*"/>
             <ColumnDefinition Width="175*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-56,0,0" AutoGenerateColumns="False" CanUserAddRows="False" >
-            <i:Interaction.Triggers>
+        <DataGrid x:Name="dataGrid"  SelectedIndex ="{Binding selectid}" SelectedValue="#63B8FF" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-56,0,0" AutoGenerateColumns="False" CanUserAddRows="False" Cursor="" >
+            
+            <i:Interaction.Triggers >
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID}" Header="编号"/>
+                <DataGridTextColumn  Binding="{Binding ID}" Header="编号"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="姓名" Width="100"/>
                 <DataGridTextColumn Binding="{Binding Age}" Header="年龄"/>
                 <DataGridTextColumn Binding="{Binding Sex}" Header="性别" Width="60"/>
                 <DataGridTextColumn Binding="{Binding Remarks}" Header="备注" Width="172"/>
             </DataGrid.Columns>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="MinWidth" Value="85"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#63B8FF"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
         </DataGrid>
         <Label x:Name="labID" Content="编号：" Margin="10,153,174.8,0" Height="26" VerticalAlignment="Top"/>
         <TextBox x:Name="txtID"  IsEnabled ="False"  Text="{Binding ID}" Margin="63,156,112.2,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top"/>

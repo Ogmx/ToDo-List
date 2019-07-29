@@ -84,6 +84,7 @@ namespace ToDo_List.ViewModel
         public DelegateCommands DeleteCommand { get; set; }
         public DelegateCommands SelectionChangedCommand { get; set; }
         public DelegateCommands SaveCommand { get; set; }
+        public DelegateCommands SearchCommand { get; set; }
 
         //定义命令属性
         public void addStudent(object parameter)
@@ -154,6 +155,32 @@ namespace ToDo_List.ViewModel
             MessageBox.Show("保存成功");
 
         }
+
+
+        public void searchStudent(object parameter)
+        {
+      
+            if( Name.Length != 0 )
+            {
+                bool bFind = mylist.Any<User>(p => p.Name == Name );
+                if (bFind)
+                {
+                    //object tmp =  mylist.Where<User>(p => p.Name == Name);
+                  
+                    MessageBox.Show("查找成功");
+                }
+                else
+                {
+                    MessageBox.Show("查找失败");
+                }
+            }
+            else
+            {
+                MessageBox.Show("请填写要查找的姓名");
+            }
+          
+        }
+
         //关联命令属性
         public MainViewModel()
         {
@@ -165,7 +192,10 @@ namespace ToDo_List.ViewModel
             UpdateCommand.ExecuteCommand = new Action<object>(updateStudent);//修改方法
 
             DeleteCommand = new DelegateCommands();
-            DeleteCommand.ExecuteCommand = new Action<object>(deleteStudent);//修改方法
+            DeleteCommand.ExecuteCommand = new Action<object>(deleteStudent);//删除方法
+
+            SearchCommand = new DelegateCommands();
+            SearchCommand.ExecuteCommand = new Action<object>(searchStudent); //查找方法
 
             SelectionChangedCommand = new DelegateCommands();
             SelectionChangedCommand.ExecuteCommand = new Action<object>(selectUser);

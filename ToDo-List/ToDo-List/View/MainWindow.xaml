@@ -20,7 +20,7 @@
             <ColumnDefinition Width="236*"/>
             <ColumnDefinition Width="175*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-70,0,0" AutoGenerateColumns="False" CanUserAddRows="False" >
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}" Grid.ColumnSpan="2" Height="204" Width="392" Margin="0,-56,0,0" AutoGenerateColumns="False" CanUserAddRows="False" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=dataGrid}" />
@@ -47,9 +47,10 @@
         </ComboBox>
         <Label x:Name="labRemarks" Content="备注：" HorizontalAlignment="Left" Margin="144,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.233,0.68" Height="26" Width="46"/>
         <TextBox x:Name="txtRemarks" Text="{Binding Remarks}" HorizontalAlignment="Left" Height="22" Margin="189,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
-        <Button x:Name="butAdd" Command="{Binding AddCommand}" Content="新增" HorizontalAlignment="Left" Margin="44,240,0,-25.4" VerticalAlignment="Top" Width="41" Height="19" RenderTransformOrigin="0.466,0.941"/>
-        <Button x:Name="butUpdate" Command="{Binding UpdateCommand}" Content="修改" HorizontalAlignment="Left" Margin="133,240,0,-25.4" VerticalAlignment="Top" Width="34" Height="19" RenderTransformOrigin="0.466,0.941"/>
-        <Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="222,240,0,-44.6" VerticalAlignment="Top" Width="69" Height="19" RenderTransformOrigin="0.466,0.941" Grid.ColumnSpan="2"/>
-        <Button x:Name="butSave" Content="保存" Command="{Binding SaveCommand}" Grid.Column="1" HorizontalAlignment="Left" Margin="85.2,240,0,-25.4" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.011,-0.895"/>
+        <Button x:Name="butAdd" Command="{Binding AddCommand}" Content="新增" HorizontalAlignment="Left" Margin="10,239,0,-5.2" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941"/>
+        <Button x:Name="butUpdate" Command="{Binding UpdateCommand}" Content="修改" HorizontalAlignment="Left" Margin="92,239,0,-5.2" Width="60" RenderTransformOrigin="0.466,0.941"/>
+        <Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="25.2,239,0,-5.2" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941" Grid.Column="1"/>
+        <Button x:Name="butSave" Content="保存" Command="{Binding SaveCommand}" Grid.Column="1" HorizontalAlignment="Left" Margin="100.2,239,0,-5.2" VerticalAlignment="Top" Width="60" RenderTransformOrigin="-0.011,-0.895"/>
+        <Button x:Name="butSearch" Content="查找" Command="{Binding SearchCommand}" HorizontalAlignment="Left" Margin="171,239,0,-5.2" VerticalAlignment="Top" Width="60" Height="19" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

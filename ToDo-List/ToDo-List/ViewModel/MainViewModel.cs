@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using ToDo_List.Commands;
 using ToDo_List.Model;
 using ToDo_List.Services;
+using ToDo_List.View;
 
 namespace ToDo_List.ViewModel
 {
@@ -79,7 +80,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("Age");
             }
         }
-
         public int selectid
         {
             get { return _selectid; }
@@ -114,22 +114,11 @@ namespace ToDo_List.ViewModel
                 MessageBox.Show("请选择修改项");
                 return;
             }
-            foreach (var item in _mylist)
+            else
             {
-                if (item.ID == ID)
-                {
-                    item.ID = ID;
-                    item.Name = Name;
-                    item.Sex = Sex;
-                    item.Remarks = Remarks;
-                    item.Age = Age;
-                    break;
-                }
+                mylist[ID - 1] = new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks };
+                MessageBox.Show("修改成功");
             }
-            RaisePropertyChanged("myList");
-            //Binding();
-            mylist = _mylist;
-
         }
         public void deleteStudent(object parameter)
         {
@@ -191,7 +180,7 @@ namespace ToDo_List.ViewModel
                         }
                     }
                     selectid = (int)find;
-                    MessageBox.Show("查找成功");
+                    MessageBox.Show("查找成功，编号为："+ (selectid + 1));
                 }
                 else
                 {
@@ -226,6 +215,9 @@ namespace ToDo_List.ViewModel
 
             SaveCommand = new DelegateCommands();
             SaveCommand.ExecuteCommand = new Action<object>(SaveUserInfo);
+
+            SearchCommand = new DelegateCommands();
+            SearchCommand.ExecuteCommand = new Action<object>(searchStudent);
 
             LoadUserInfo();
         }

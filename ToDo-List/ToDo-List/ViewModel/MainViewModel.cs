@@ -131,6 +131,7 @@ namespace ToDo_List.ViewModel
         //定义命令属性
         public void addStudent(object parameter)
         {
+             WriteLog("进行了添加操作");
             int id = mylist[mylist.Count - 1].ID;
             mylist.Add(new User() { ID = id + 1, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
             //Binding();
@@ -183,6 +184,7 @@ namespace ToDo_List.ViewModel
         }
         public void SaveUserInfo(object parameter)
         {
+             WriteLog("进行了保存操作");
             XmlDataService ds = new XmlDataService();
             ds.SetAllUsers(mylist);
             MessageBox.Show("保存成功");

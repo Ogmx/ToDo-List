@@ -10,11 +10,40 @@ using ToDo_List.Commands;
 using ToDo_List.Model;
 using ToDo_List.Services;
 using ToDo_List.View;
+using log4net;
 
 namespace ToDo_List.ViewModel
 {
+
     public class MainViewModel:NotificationObject
     {
+        //日志操作
+        public static ILog logError = LogManager.GetLogger("ErrorLog");
+
+        public static ILog logInfor = LogManager.GetLogger("InforLog");
+
+        /// <summary>
+        /// 记录错误日志
+        /// </summary>
+        public static void WriteLog(string infor, Exception ex)
+        {
+            if (logError.IsErrorEnabled)
+            {
+                logError.Error(infor, ex);
+            }
+        }
+        /// <summary>
+        /// 记录普通日志
+        /// </summary>
+        public static void WriteLog(string infor)
+        {
+            if (logInfor.IsInfoEnabled)
+            {
+                logInfor.Info(infor);
+            }
+        }
+
+
         ObservableCollection<User> _mylist = new ObservableCollection<User>();
 
         string _name = string.Empty;
@@ -116,6 +145,7 @@ namespace ToDo_List.ViewModel
             }
             else
             {
+                WriteLog("进行了修改操作" );
                 mylist[ID - 1] = new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks };
                 MessageBox.Show("修改成功");
             }
@@ -127,6 +157,7 @@ namespace ToDo_List.ViewModel
                 MessageBox.Show("请选择删除项");
                 return;
             }
+            WriteLog("进行了删除操作");
             User user1 = _mylist.Single(p => p.ID == ID);
             _mylist.Remove(user1);
             mylist = _mylist;
@@ -134,7 +165,7 @@ namespace ToDo_List.ViewModel
         }
         public void selectUser(object parameter)
         {
-
+            WriteLog("进行了选中操作");
             if (parameter != null)
             {
                 DataGrid dg = (DataGrid)parameter;
@@ -161,8 +192,8 @@ namespace ToDo_List.ViewModel
 
         public void searchStudent(object parameter)
         {
-      
-            if( Name.Length != 0 )
+            WriteLog("进行了查找操作");
+            if ( Name.Length != 0 )
             {
                 bool bFind = mylist.Any<User>(p => p.Name == Name );
                 if (bFind)

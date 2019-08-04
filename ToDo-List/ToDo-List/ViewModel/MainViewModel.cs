@@ -127,7 +127,7 @@ namespace ToDo_List.ViewModel
         public DelegateCommands SelectionChangedCommand { get; set; }
         public DelegateCommands SaveCommand { get; set; }
         public DelegateCommands SearchCommand { get; set; }
-
+        public DelegateCommands JumpCommand { get; set; }
         //定义命令属性
         public void addStudent(object parameter)
         {
@@ -193,8 +193,6 @@ namespace ToDo_List.ViewModel
             MessageBox.Show("保存成功");
 
         }
-
-
         public void searchStudent(object parameter)
         {
             WriteLog("进行了查找操作");
@@ -230,6 +228,11 @@ namespace ToDo_List.ViewModel
           
         }
 
+        public void Jump(object parameter)
+        {
+            AddUserWindow a = new AddUserWindow();
+            a.ShowDialog();
+        }
         //关联命令属性
         public MainViewModel()
         {
@@ -254,6 +257,9 @@ namespace ToDo_List.ViewModel
 
             SearchCommand = new DelegateCommands();
             SearchCommand.ExecuteCommand = new Action<object>(searchStudent);
+
+            JumpCommand = new DelegateCommands();
+            JumpCommand.ExecuteCommand = new Action<object>(Jump);
 
             LoadUserInfo();
         }

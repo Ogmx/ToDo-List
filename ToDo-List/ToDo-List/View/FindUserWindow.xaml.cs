@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ToDo_List.ViewModel;
 
 namespace ToDo_List.View
 {
@@ -22,6 +23,7 @@ namespace ToDo_List.View
         public FindUserWindow()
         {
             InitializeComponent();
+            this.DataContext = new FindUserViewModel();
         }
     }
 }

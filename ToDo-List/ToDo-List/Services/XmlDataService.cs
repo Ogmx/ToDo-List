@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using ToDo_List.Model;
 
@@ -29,10 +30,16 @@ namespace ToDo_List.Services
             }
             return UserList;
         }
-
+        public int GetNum()
+        {
+            string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\UserInfo.xml");
+            XDocument xDOc = XDocument.Load(xmlFileName);
+            var users = xDOc.Descendants("User");
+            return users.Count();
+        }
         public void SetAllUsers(ObservableCollection<User>UserList)
         {
-            string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\Test.xml");    //防止覆盖测试数据，暂时写入新文件
+            string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\UserInfo.xml");    
             XElement root = new XElement("Users");
             
             foreach(var d in UserList)
@@ -46,6 +53,36 @@ namespace ToDo_List.Services
                 root.Add(user);
             }
             root.Save(xmlFileName);
+        }
+
+        public void SetUser(List<User>UserList)
+        {
+            string xmlFileName = System.IO.Path.Combine(Environment.CurrentDirectory, @"Data\UserInfo.xml");
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(xmlFileName); 
+            XmlNode root = xDoc.SelectSingleNode("Users");
+            foreach (var d in UserList)
+            {
+                XmlElement user = xDoc.CreateElement("User");
+                XmlElement a1 = xDoc.CreateElement("ID");
+                a1.InnerText = d.ID.ToString();
+                user.AppendChild(a1);
+                XmlElement a2 = xDoc.CreateElement("Name");
+                a2.InnerText = d.Name;
+                user.AppendChild(a2);
+                XmlElement a3 = xDoc.CreateElement("Age");
+                a3.InnerText = d.Age.ToString();
+                user.AppendChild(a3);
+                XmlElement a4 = xDoc.CreateElement("Sex");
+                a4.InnerText = d.Sex;
+                user.AppendChild(a4);
+                XmlElement a5 = xDoc.CreateElement("Remarks");
+                a5.InnerText = d.Remarks;
+                user.AppendChild(a5);
+
+                root.AppendChild(user);
+            }
+            xDoc.Save(xmlFileName);
         }
     }
 }

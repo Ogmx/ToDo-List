@@ -3,16 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ToDo_List.View"
         mc:Ignorable="d"
-        Title="FindUser" Height="178.218" Width="337.525">
+        x:Name="FWindow"
+        Title="FindUser" Height="178.218" Width="337.525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas Margin="19,23,36.2,29.8">
             <Label x:Name="label" Content="请输入要查找人员姓名：" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="127" Canvas.Left="147" Canvas.Top="4"/>
-            <Button x:Name="button" Content="查找" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Canvas.Left="36" Canvas.Top="76"/>
-            <Button x:Name="button1" Content="返回" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Canvas.Left="189" Canvas.Top="76"/>
-
+            <TextBox x:Name="textBox" Text="{Binding Name}" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap"  VerticalAlignment="Top" Width="127" Canvas.Left="147" Canvas.Top="4"/>
+            <Button x:Name="button" Content="查找" Command="{Binding SearchCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Canvas.Left="36" Canvas.Top="76"/>
+            <Button x:Name="button1" Content="返回" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=FWindow}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Canvas.Left="189" Canvas.Top="76"/>
         </Canvas>
 
     </Grid>

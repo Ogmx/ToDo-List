@@ -98,6 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommands.cs" />
     <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\SQLiteDataService.cs" />
     <Compile Include="Services\XmlDataService.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\FindUserViewModel.cs" />

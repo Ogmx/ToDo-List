@@ -31,12 +31,10 @@ namespace ToDo_List.ViewModel
             }
         }/// 记录普通日志
 
-        public List<User> mylist = new List<User>();
         string _name = string.Empty;
-        int _id = 0;
         int _age = 0;
         string _sex = string.Empty;
-        string _remarks = string.Empty;
+        string _remarks = "无";
 
         public string Name
         {
@@ -65,15 +63,6 @@ namespace ToDo_List.ViewModel
                 RaisePropertyChanged("Remarks");
             }
         }
-        public int ID
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                RaisePropertyChanged("ID");
-            }
-        }
         public int Age
         {
             get { return _age; }
@@ -93,26 +82,17 @@ namespace ToDo_List.ViewModel
             if(win!=null)
                 win.Close();
         }
-        public void SaveUserInfo()
-        {
-            WriteLog("进行了保存操作");
-            XmlDataService ds = new XmlDataService();
-            ds.SetUser(mylist);
-
-        }
         public void addStudent(object parameter)
         {
             WriteLog("进行了添加操作");
-            XmlDataService ds = new XmlDataService();
-            int id = ds.GetNum();
-            mylist.Add(new User() { ID = id + 1, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
-            SaveUserInfo();
+            SQLiteDataService ds = new SQLiteDataService();
+            List<User> list = new List<User>();
+            list.Add(new User() { ID = 0, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
+            ds.InsertUser(list);
             MessageBox.Show("添加成功");
             AddUserWindow win = (AddUserWindow)parameter;
             if (win != null)
                 win.Close();
-           
-
         }
 
         public AddUserViewModel()

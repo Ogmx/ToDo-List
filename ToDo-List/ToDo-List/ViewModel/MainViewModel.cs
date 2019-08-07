@@ -15,16 +15,12 @@ using System.Data.SQLite;
 using System.Data;
 
 
-
-
 namespace ToDo_List.ViewModel
 {
-    //NotificationObject
     public class MainViewModel : NotificationObject
     {
         //日志操作
         public static ILog logError = LogManager.GetLogger("ErrorLog");
-
         public static ILog logInfor = LogManager.GetLogger("InforLog");
 
         /// <summary>
@@ -47,45 +43,7 @@ namespace ToDo_List.ViewModel
                 logInfor.Info(infor);
             }
         }
-
-     //   DataGrid dataGrid;
         ObservableCollection<User> _mylist = new ObservableCollection<User>();
-     //   DataSet userDataset;
-    //    SQLiteConnection m_dbConnection;
-    //    SQLiteCommand cmd;
-    //    SQLiteDataAdapter userDataAdapter;
-       // DataGrid.o source;
-       /*
-        //创建一个空的数据库
-        void createNewDatabase()
-        {
-            SQLiteConnection.CreateFile("MyDatabase.sqlite");
-        }
-
-
-        //创建一个连接到指定数据库
-        void connectToDatabase()
-        {
-            m_dbConnection = new SQLiteConnection("Data Source=MyDatabase.sqlite;Version=3;");
-            m_dbConnection.Open();
-            cmd = new SQLiteCommand();
-            cmd.Connection = m_dbConnection;
-        }
-
-        //在指定数据库中创建一个table
-        void createTable()
-        {
-            string sql = "create table if not exists list(id int,name varchar(20), age int,sex varchar(20),other varchar(20))";
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-            command.ExecuteNonQuery();
-        }
-
-        */
-     
-
-
-
-
 
         string _name = string.Empty;
         int _id = 0;
@@ -95,7 +53,6 @@ namespace ToDo_List.ViewModel
 
 
         //定义数据属性
-        
         public ObservableCollection<User> mylist
         {
             get { return _mylist; }
@@ -151,25 +108,6 @@ namespace ToDo_List.ViewModel
             }
         }
         
-        /*
-        void showTable()
-        {
-            string sql = "SELECT * FROM list";
-            cmd.CommandText = sql;
-            userDataAdapter = new SQLiteDataAdapter();
-            userDataAdapter.SelectCommand = cmd;
-            userDataset = new DataSet();
-            userDataAdapter.Fill(userDataset, "list");
-            
-            
-            //  ((this.FindName("dataGrid1")) as DataGrid).ItemsSource = userDataset.Tables["list"].DefaultView;
-            //    ((this.FindName("dataGrid1")) as DataGrid).AutoGenerateColumns = true;
-
-
-        }*/
-        
-            
-
         //声明命令属性
         public DelegateCommands UpdateCommand { get; set; }
         public DelegateCommands DeleteCommand { get; set; }
@@ -189,8 +127,12 @@ namespace ToDo_List.ViewModel
             else
             {
                 WriteLog("进行了修改操作" );
-           //    mylist[ID - 1] = new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks };
+                List<User> list = new List<User>();
+                SQLiteDataService ds = new SQLiteDataService();
+                list.Add(new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
+                ds.UpdateUser(list);
                 MessageBox.Show("修改成功");
+                LoadUserInfo();
             }
         }
         public void deleteStudent(object parameter)
@@ -201,11 +143,10 @@ namespace ToDo_List.ViewModel
                 return;
             }
             WriteLog("进行了删除操作");
-            User user1 = _mylist.Single(p => p.ID == ID);
-            _mylist.Remove(user1);
-          //  mylist = _mylist;
+            SQLiteDataService ds = new SQLiteDataService();
+            ds.DeleteUser(ID);
+            LoadUserInfo();
             ID = 0;
-
         }
         public void selectUser(object parameter)
         {
@@ -225,13 +166,6 @@ namespace ToDo_List.ViewModel
 
             }
         }
-        public void SaveUserInfo()
-        {
-            WriteLog("进行了保存操作");
-            XmlDataService ds = new XmlDataService();
-         //   ds.SetAllUsers(mylist);
-            MessageBox.Show("保存成功");
-        }
         public void JumpToFindUser(object parameter)
         {
             FindUserWindow a = new FindUserWindow();
@@ -247,12 +181,7 @@ namespace ToDo_List.ViewModel
         //关联命令属性
         public MainViewModel()
         {
-            
-           // createNewDatabase();
-         //   connectToDatabase();
-        //    createTable();
-         //   showTable();
-         
+
             UpdateCommand = new DelegateCommands();
             UpdateCommand.ExecuteCommand = new Action<object>(updateStudent);//修改方法
 
@@ -267,16 +196,14 @@ namespace ToDo_List.ViewModel
 
             JumpToFindUserCommand = new DelegateCommands();
             JumpToFindUserCommand.ExecuteCommand = new Action<object>(JumpToFindUser);
-            
+
             LoadUserInfo();
         }
 
         public void LoadUserInfo()
         {
-           // showTable();
-            
             mylist.Clear();
-            XmlDataService ds = new XmlDataService();
+            SQLiteDataService ds = new SQLiteDataService();
             var users = ds.GetAllUsers();
             
             foreach(var user in users)

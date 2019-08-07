@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="90*"/>
                 <ColumnDefinition Width="154*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid  AutoGenerateColumns="False" x:Name="dataGrid"  SelectedIndex ="{Binding selectid}" SelectedValue="#63B8FF" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}"  Grid.ColumnSpan="3" Height="204" Width="392" Margin="0,-56,0,0"  CanUserAddRows="False" Cursor="" SelectionChanged="DataGrid_SelectionChanged" >
+            <DataGrid  AutoGenerateColumns="False" x:Name="dataGrid"  SelectedIndex ="{Binding selectid}" SelectedValue="#63B8FF" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding mylist}"  Grid.ColumnSpan="3" Height="204" Width="392" Margin="0,-56,0,0"  CanUserAddRows="False" Cursor=""  >
 
                 <i:Interaction.Triggers >
                     <i:EventTrigger EventName="SelectionChanged" >

@@ -63,31 +63,14 @@ namespace ToDo_List.ViewModel
         public void searchStudent(object parameter)
         {
             WriteLog("进行了查找操作");
-            int selectid = 0;
             if (Name.Length != 0)
             {
-                bool bFind = mylist.Any<User>(p => p.Name == Name);
-                if (bFind)
-                {
-
-                    //dataGrid
-                    long find = 0;
-                    long len = mylist.LongCount();
-                    for (long i = 0; i < len; ++i)
-                    {
-                        if (mylist[(int)i].Name == Name)
-                        {
-                            find = i;
-                            break;
-                        }
-                    }
-                    selectid = (int)find;
-                    MessageBox.Show("查找成功，编号为：" + (selectid + 1));
-                }
+                SQLiteDataService ds = new SQLiteDataService();
+                int id = ds.FindUser(Name);
+                if (id == 0)
+                    MessageBox.Show("未找到此人");
                 else
-                {
-                    MessageBox.Show("查找失败");
-                }
+                    MessageBox.Show("查找成功，id="+id);
             }
             else
             {
@@ -95,26 +78,12 @@ namespace ToDo_List.ViewModel
             }
 
         }
-        public void LoadUserInfo()
-        {
-            XmlDataService ds = new XmlDataService();
-            var users = ds.GetAllUsers();
-
-            foreach (var user in users)
-            {
-                mylist.Add(new User() { ID = user.ID, Name = user.Name, Age = user.Age, Sex = user.Sex, Remarks = user.Remarks });
-            }
-
-        }
-
         public FindUserViewModel()
         {
             BackCommand = new DelegateCommands();
             BackCommand.ExecuteCommand = new Action<object>(Back);
             SearchCommand = new DelegateCommands();
             SearchCommand.ExecuteCommand = new Action<object>(searchStudent);
-
-            LoadUserInfo();
         }
     }
 }

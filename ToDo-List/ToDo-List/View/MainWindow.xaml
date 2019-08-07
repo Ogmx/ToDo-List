@@ -55,9 +55,9 @@
             <Label x:Name="labID" Content="编号：" Margin="10,153,82.4,0" Height="26" VerticalAlignment="Top"/>
             <TextBox x:Name="txtID"  IsEnabled ="False"  Text="{Binding ID}" Margin="63,156,29.4,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top"/>
             <Label x:Name="labName" Content="姓名：" Margin="143,154,0,0" HorizontalAlignment="Left" Width="46" Height="26" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-            <TextBox x:Name="txtName" Text="{Binding Name}" Margin="41.6,156,133,0" TextWrapping="Wrap" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <Label x:Name="labPAge" Content="年龄：" Margin="26.4,155,0,0" RenderTransformOrigin="-0.233,0.68" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Height="25" Width="47"/>
-            <TextBox x:Name="txtAge" Text="{Binding Age}" Margin="73.4,156,31,0" TextWrapping="Wrap" Height="24" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBox x:Name="txtName" Text="{Binding Name}" Margin="42,0,9,90" TextWrapping="Wrap" Grid.Column="1" Height="22" VerticalAlignment="Bottom"/>
+            <Label x:Name="labPAge" Content="年龄：" Margin="9.933,154,0,0" RenderTransformOrigin="-0.233,0.68" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Height="25" Width="47"/>
+            <TextBox x:Name="txtAge" Text="{Binding Age}" Margin="56.933,156,10,0" TextWrapping="Wrap" Height="24" VerticalAlignment="Top" Grid.Column="2"/>
             <Label x:Name="labSex" Content="性别：" Margin="10,188,82.4,0" RenderTransformOrigin="-0.233,0.68" Height="26" VerticalAlignment="Top"/>
             <ComboBox Text="{Binding Sex}"  SelectedIndex="0" x:Name="comboBox" Margin="63,191,29.4,0" Height="21" VerticalAlignment="Top">
                 <ComboBoxItem Tag="1" Content="男"/>
@@ -65,11 +65,10 @@
             </ComboBox>
             <Label x:Name="labRemarks" Content="备注：" HorizontalAlignment="Left" Margin="143,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.233,0.68" Height="26" Width="46" Grid.ColumnSpan="2"/>
             <TextBox x:Name="txtRemarks" Text="{Binding Remarks}" HorizontalAlignment="Left" Height="22" Margin="41.6,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Column="1"/>
-            <Button x:Name="butAdd" Command="{Binding JumpToAddUserCommand}" Content="新增" HorizontalAlignment="Left" Margin="10,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941"/>
-            <Button x:Name="butUpdate" Command="{Binding UpdateCommand}" Content="修改" HorizontalAlignment="Left" Margin="92,254,0,-5" Width="56" RenderTransformOrigin="0.466,0.941" Grid.ColumnSpan="2"/>
-            <Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="13.4,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941" Grid.Column="2"/>
-            <Button x:Name="butSave" Content="保存" Command="{Binding SaveCommand}" Grid.Column="2" HorizontalAlignment="Left" Margin="88.4,254,0,-5" VerticalAlignment="Top" Width="60" RenderTransformOrigin="-0.011,-0.895" Height="19"/>
-            <Button x:Name="butSearch" Content="查找" Command="{Binding JumpToFindUserCommand}" HorizontalAlignment="Left" Margin="23.6,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+            <Button x:Name="butAdd" Command="{Binding JumpToAddUserCommand}" Content="新增" HorizontalAlignment="Left" Margin="14,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941"/>
+            <Button x:Name="butUpdate" Command="{Binding JumpToUpdateUserCommand}" Content="修改" HorizontalAlignment="Left" Margin="114,254,0,-5" Width="56" RenderTransformOrigin="0.466,0.941" Grid.ColumnSpan="2"/>
+            <Button x:Name="butDelete" Command="{Binding DeleteCommand}" Content="删除" HorizontalAlignment="Left" Margin="21.2,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.466,0.941" Grid.Column="2"/>
+            <Button x:Name="butSearch" Content="查找" Command="{Binding JumpToFindUserCommand}" HorizontalAlignment="Left" Margin="51.2,254,0,-5" VerticalAlignment="Top" Width="60" Height="19" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
         </Grid>
     </Canvas>
 </Window>

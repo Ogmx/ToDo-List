@@ -109,32 +109,14 @@ namespace ToDo_List.ViewModel
         }
         
         //声明命令属性
-        public DelegateCommands UpdateCommand { get; set; }
         public DelegateCommands DeleteCommand { get; set; }
         public DelegateCommands SelectionChangedCommand { get; set; }
         public DelegateCommands SaveCommand { get; set; }
         public DelegateCommands JumpToAddUserCommand { get; set; }
         public DelegateCommands JumpToFindUserCommand { get; set; }
+        public DelegateCommands JumpToUpdateUserCommand { get; set; }
         //定义命令属性
         
-        public void updateStudent(object parameter)
-        {
-            if (ID == 0)
-            {
-                MessageBox.Show("请选择修改项");
-                return;
-            }
-            else
-            {
-                WriteLog("进行了修改操作" );
-                List<User> list = new List<User>();
-                SQLiteDataService ds = new SQLiteDataService();
-                list.Add(new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
-                ds.UpdateUser(list);
-                MessageBox.Show("修改成功");
-                LoadUserInfo();
-            }
-        }
         public void deleteStudent(object parameter)
         {
             if (ID == 0)
@@ -170,20 +152,32 @@ namespace ToDo_List.ViewModel
         {
             FindUserWindow a = new FindUserWindow();
             a.Show();
+            ID = 0;
         }
         public void JumpToAddUser(object parameter)
         {
             AddUserWindow a = new AddUserWindow();
             a.ShowDialog();
             LoadUserInfo();
+            ID = 0;
         }
-        
+        public void JumpToUpdate(object parameter)
+        {
+            if (ID == 0)
+                MessageBox.Show("请选择要修改对象");
+            else
+            {
+                UpdateUserWindow a = new UpdateUserWindow();
+                UpdateUserViewModel._id = ID;
+                a.ShowDialog();
+                LoadUserInfo();
+                ID = 0;
+            }
+            
+        }
         //关联命令属性
         public MainViewModel()
         {
-
-            UpdateCommand = new DelegateCommands();
-            UpdateCommand.ExecuteCommand = new Action<object>(updateStudent);//修改方法
 
             DeleteCommand = new DelegateCommands();
             DeleteCommand.ExecuteCommand = new Action<object>(deleteStudent);//删除方法
@@ -191,6 +185,8 @@ namespace ToDo_List.ViewModel
             SelectionChangedCommand = new DelegateCommands();
             SelectionChangedCommand.ExecuteCommand = new Action<object>(selectUser);
 
+            JumpToUpdateUserCommand = new DelegateCommands();
+            JumpToUpdateUserCommand.ExecuteCommand = new Action<object>(JumpToUpdate);
             JumpToAddUserCommand = new DelegateCommands();
             JumpToAddUserCommand.ExecuteCommand = new Action<object>(JumpToAddUser);
 

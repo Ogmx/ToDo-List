@@ -17,10 +17,7 @@ namespace ToDo_List.ViewModel
     {
         public static ILog logError = LogManager.GetLogger("ErrorLog");
         public static ILog logInfor = LogManager.GetLogger("InforLog");
-
-        /// <summary>
         /// 记录错误日志
-        /// </summary>
         public static void WriteLog(string infor, Exception ex)
         {
             if (logError.IsErrorEnabled)
@@ -28,9 +25,7 @@ namespace ToDo_List.ViewModel
                 logError.Error(infor, ex);
             }
         }
-        /// <summary>
         /// 记录普通日志
-        /// </summary>
         public static void WriteLog(string infor)
         {
             if (logInfor.IsInfoEnabled)

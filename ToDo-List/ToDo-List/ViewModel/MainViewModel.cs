@@ -167,8 +167,8 @@ namespace ToDo_List.ViewModel
 
 
         }*/
-
-
+        
+            
 
         //声明命令属性
         public DelegateCommands UpdateCommand { get; set; }

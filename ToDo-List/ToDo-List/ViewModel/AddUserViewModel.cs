@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using ToDo_List.Commands;
@@ -88,6 +89,27 @@ namespace ToDo_List.ViewModel
             SQLiteDataService ds = new SQLiteDataService();
             List<User> list = new List<User>();
             list.Add(new User() { ID = 0, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
+            if (list[0].Name == null )
+            {
+                MessageBox.Show("姓名不能为空");
+                return;
+            }
+            Regex reg = new Regex(@"[^0-9]"); // 排除型字符组(取反思想)
+            if (!reg.IsMatch(list[0].Name))
+            {
+                MessageBox.Show("请输入正确姓名");
+                return;
+            }
+            if (list[0].Age <= 0 ||list[0].Age>=150 || list[0].Age.GetType() == list[0].Name.GetType())
+            {
+                MessageBox.Show("请输入正确年龄");
+                return;
+            }
+            if(list[0].Sex==null)
+            {
+                MessageBox.Show("请选择性别");
+                return;
+            }
             ds.InsertUser(list);
             MessageBox.Show("添加成功");
             AddUserWindow win = (AddUserWindow)parameter;

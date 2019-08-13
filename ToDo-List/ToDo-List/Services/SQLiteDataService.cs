@@ -35,7 +35,7 @@ namespace ToDo_List.Services
             ConnectToDatabase();
             cmd.CommandText = "CREATE TABLE IF NOT EXISTS User(id int,name varchar(20),age int,sex varchar(4),remark varchar(50))";//输入SQL语句
             cmd.ExecuteNonQuery();//调用此方法运行
-            
+            cn.Close();
         }
         
         public void initTable()
@@ -59,7 +59,7 @@ namespace ToDo_List.Services
             sr.Read();
             cnt = sr.GetInt32(0);
             sr.Close();
-        
+            //cn.Close();
             return cnt;
         }
 
@@ -78,7 +78,7 @@ namespace ToDo_List.Services
             cmd.Parameters.Add("sex", DbType.String).Value = sex;
             cmd.Parameters.Add("remark", DbType.String).Value = remark;
             cmd.ExecuteNonQuery();
-            
+            cn.Close();
         }
 
         public void DeleteUser(int _id)
@@ -87,6 +87,7 @@ namespace ToDo_List.Services
             cmd.CommandText = "DELETE FROM User WHERE id=@id";
             cmd.Parameters.Add("id", DbType.Int32).Value = _id;
             cmd.ExecuteNonQuery();
+            cn.Close();
         }
 
         public void UpdateUser(List<User>list)
@@ -104,7 +105,7 @@ namespace ToDo_List.Services
             cmd.Parameters.Add("sex", DbType.String).Value = sex;
             cmd.Parameters.Add("remark", DbType.String).Value = remark;
             cmd.ExecuteNonQuery();
-
+            cn.Close();
         }
 
         public int FindUser(string name)
@@ -116,6 +117,8 @@ namespace ToDo_List.Services
             SQLiteDataReader sr = cmd.ExecuteReader();
             if(sr.Read())
                 id = sr.GetInt32(0);
+            sr.Close();
+            cn.Close();
             return id;
         }
 
@@ -136,6 +139,7 @@ namespace ToDo_List.Services
                 mylist.Add(user);
             }
             sr.Close();
+            cn.Close();
             return mylist;
         }
 

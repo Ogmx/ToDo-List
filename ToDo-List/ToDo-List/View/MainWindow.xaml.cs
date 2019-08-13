@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDo_List.View;
 using ToDo_List.ViewModel;
 
 namespace ToDo_List
@@ -23,8 +24,21 @@ namespace ToDo_List
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.DataContext = new MainViewModel();
+            LoginWindow login = new LoginWindow();
+            login.ShowDialog();
+            if (login.DialogResult == true)
+            {
+                login.Close();
+                InitializeComponent();
+                this.DataContext = new MainViewModel();
+            }
+            else
+            {
+                login.Close();
+                this.Close();
+            }
+                
+            
         }
     }
 }

@@ -25,5 +25,6 @@ namespace ToDo_List.View
             InitializeComponent();
             this.DataContext = new LoginViewModel();
         }
+        
     }
 }

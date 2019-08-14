@@ -27,8 +27,16 @@ namespace ToDo_List.Services
             cn.Open();
             cmd = new SQLiteCommand();
             cmd.Connection = cn;
+            
         }
-
+        void ConnectToAccountInfo()
+        {
+            cn = new SQLiteConnection("Data Source=Data/AccountInfo.db;Version=3;");
+            cn.Open();
+            cmd = new SQLiteCommand();
+            cmd.Connection = cn;
+        }
+   
       //在指定数据库中创建一个table
         void CreateTable()
         {
@@ -122,6 +130,40 @@ namespace ToDo_List.Services
             return id;
         }
 
+        public string GetPWD(string name)
+        {
+            string ans = null;
+            ConnectToAccountInfo();
+            cmd.CommandText = "SELECT * FROM Account WHERE name=@name";
+            cmd.Parameters.Add("name", DbType.String).Value = name;
+            SQLiteDataReader sr = cmd.ExecuteReader();
+            if (sr.Read())
+                ans = sr.GetString(2);
+            sr.Close();
+            cn.Close();
+            return ans;
+        }
+
+        public bool Register(string name,string password)
+        {
+            ConnectToAccountInfo();
+            cmd.CommandText = "SELECT * FROM Account WHERE name=@name";
+            cmd.Parameters.Add("name", DbType.String).Value = name;
+            SQLiteDataReader sr = cmd.ExecuteReader();
+            if (sr.Read())
+            {
+                sr.Close();
+                cn.Close();
+                return false;
+            }
+            sr.Close();
+            cmd.CommandText = "INSERT INTO Account(name,password) VALUES(@name,@password)";
+            cmd.Parameters.Add("name", DbType.String).Value = name;
+            cmd.Parameters.Add("password", DbType.String).Value = password;
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            return true;
+        }
         public ObservableCollection<User> GetAllUsers()
         {
             ObservableCollection<User> mylist = new ObservableCollection<User>();

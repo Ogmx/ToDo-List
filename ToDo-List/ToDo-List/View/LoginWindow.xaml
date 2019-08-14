@@ -3,21 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ToDo_List.View"
         mc:Ignorable="d"
         x:Name="LWindow"
         Title="LoginWindow" MinWidth="350" MinHeight="350" Width="350" Height="350" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" MaxWidth="350" MaxHeight="350">
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="176*"/>
-			<ColumnDefinition Width="117*"/>
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="176*"/>
+            <ColumnDefinition Width="117*"/>
+        </Grid.ColumnDefinitions>
         <Button x:Name="login_btn" Content="登录" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=LWindow}" HorizontalAlignment="Left" Margin="66,237,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.768,0.477"/>
         <Button x:Name="regsiter_btn" Content="注册" Command="{Binding GoToRegisterCommand}" HorizontalAlignment="Left" Margin="206,237,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
-		<Label x:Name="username_lab" Content="用户名" HorizontalAlignment="Left" Margin="53,50,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="password_lab" Content="密码" HorizontalAlignment="Left" Margin="53,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.029,0.27"/>
-		<TextBox x:Name="username_text" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
-		<TextBox x:Name="password_text" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,110,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
+        <Label x:Name="username_lab" Content="用户名" HorizontalAlignment="Left" Margin="53,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="password_lab" Content="密码" HorizontalAlignment="Left" Margin="53,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.029,0.27"/>
+        <TextBox x:Name="username_text" Text="{Binding Name}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="22" Margin="133,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="133,106,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="148" Height="22"/>
 
-	</Grid>
+    </Grid>
 </Window>

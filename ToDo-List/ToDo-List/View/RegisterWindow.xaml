@@ -12,14 +12,14 @@
 			<ColumnDefinition Width="176*"/>
 			<ColumnDefinition Width="117*"/>
 		</Grid.ColumnDefinitions>
-		<Button x:Name="regsiter_btn" Content="注册" HorizontalAlignment="Left" Margin="66,237,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.768,0.477"/>
+        <Button x:Name="regsiter_btn" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=RWindow}" Content="注册" HorizontalAlignment="Left" Margin="66,237,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.768,0.477"/>
         <Button x:Name="back_btn" Command="{Binding BackCommand}" CommandParameter="{Binding ElementName=RWindow}" Content="返回" HorizontalAlignment="Left" Margin="206,237,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
 		<Label x:Name="username_lab" Content="用户名" HorizontalAlignment="Left" Margin="53,50,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="password_lab" Content="密码" HorizontalAlignment="Left" Margin="53,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.029,0.27"/>
-		<TextBox x:Name="username_text" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
-		<TextBox x:Name="password_text" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,110,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
+		<TextBox x:Name="username_text" Text="{Binding Name}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,54,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
+		<TextBox x:Name="password_text" Text="{Binding Password}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
         <Label x:Name="t_password_text" Content="再次输入密码" HorizontalAlignment="Left" Margin="34,155,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
+        <TextBox x:Name="textBox" Text="{Binding Password2}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="133,159,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
 
     </Grid>
 </Window>

@@ -99,6 +99,31 @@ namespace ToDo_List.ViewModel
             List<User> list = new List<User>();
             SQLiteDataService ds = new SQLiteDataService();
             list.Add(new User() { ID = ID, Name = Name, Age = Age, Sex = Sex, Remarks = Remarks });
+
+            if (Name.Length > 18)
+            {
+                MessageBox.Show("姓名过长！");
+                return;
+            }
+
+            if (Age > 100 || Age < 0)
+            {
+                MessageBox.Show("年龄输入有误！");
+                return;
+            }
+
+            if(Sex.Length == 0)
+            {
+                MessageBox.Show("请选择性别");
+                return;
+            }
+
+            if (Remarks.Length > 3)
+            {
+                MessageBox.Show("备注过长！");
+                return;
+            }
+
             if (list[0].Name == null)
             {
                 MessageBox.Show("姓名不能为空");
@@ -115,11 +140,7 @@ namespace ToDo_List.ViewModel
                 MessageBox.Show("请输入正确年龄");
                 return;
             }
-            if (list[0].Sex == null)
-            {
-                MessageBox.Show("请选择性别");
-                return;
-            }
+            
             ds.UpdateUser(list);
             MessageBox.Show("修改成功");
             UpdateUserWindow win = (UpdateUserWindow)parameter;

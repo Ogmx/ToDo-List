@@ -7,6 +7,7 @@ using System.Windows;
 using ToDo_List.Commands;
 using ToDo_List.View;
 using ToDo_List.Services;
+using System.Text.RegularExpressions;
 
 namespace ToDo_List.ViewModel
 {
@@ -54,7 +55,8 @@ namespace ToDo_List.ViewModel
         }
         public void Register(object parameter)
         {
-            if(Name==null)
+
+            if (Name==null)
             {
                 MessageBox.Show("用户名不能为空");
                 return;
@@ -64,7 +66,19 @@ namespace ToDo_List.ViewModel
                 MessageBox.Show("密码不能为空");
                 return;
             }
-            if(Password!=Password2)
+            Regex reg = new Regex(@"[^0-9]"); // 排除型字符组(取反思想)
+            if (reg.IsMatch(Name))
+            {
+                MessageBox.Show("姓名中不能包含特殊符号！");
+                return;
+            }
+
+            if (reg.IsMatch(Password) || reg.IsMatch(Password2))
+            {
+                MessageBox.Show("密码中不能包含特殊符号！");
+                return;
+            }
+            if (Password!=Password2)
             {
                 MessageBox.Show("两次输入的密码不一致");
                 return;
